@@ -8,12 +8,12 @@ import (
 func CreateUrlTable(db *sql.DB) {
     createTableSQL := `
     CREATE TABLE IF NOT EXISTS urls (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         original_url TEXT NOT NULL,
         short_url VARCHAR(10) NOT NULL UNIQUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        access_count INT DEFAULT 0
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        access_count INTEGER DEFAULT 0
+    );
     `
 
     _, err := db.Exec(createTableSQL)

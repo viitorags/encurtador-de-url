@@ -19,13 +19,14 @@ func InitDB() (*sql.DB, error) {
     dbPass := os.Getenv("DB_PASS")
     dbName := os.Getenv("DB_NAME")
 
-    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
-        dbUser, dbPass, dbHost, dbPort, dbName,
+    dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+        dbHost, dbPort, dbUser, dbPass, dbName,
     )
 
-    db, err := sql.Open("mysql", dsn)
+    db, err := sql.Open("postgres", dsn)
     if err != nil {
-        logger.Error("error initialize database: ", err)
+        logger.Error("Erro ao inicializar banco de dados: ", err)
+        return nil, err
     }
 
     if err := db.Ping(); err != nil {
