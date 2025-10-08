@@ -42,7 +42,7 @@
             const resultDiv = document.getElementById('result');
 
             button.addEventListener('click', async () => {
-                const url = input.value.trim();
+                let url = input.value.trim();
                 if (!url) return alert('Digite uma URL!');
 
                 const urlPattern = /^(https?:\/\/)/i;
