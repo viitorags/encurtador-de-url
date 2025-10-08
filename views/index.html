@@ -45,6 +45,19 @@
                 const url = input.value.trim();
                 if (!url) return alert('Digite uma URL!');
 
+                const urlPattern = /^(https?:\/\/)/i;
+
+                if (!urlPattern.test(url)) {
+                    url = 'https://' + url;
+                }
+
+                const fullUrlPattern =
+                    /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
+
+                if (!fullUrlPattern.test(url)) {
+                    return alert('URL inválida! Verifique e tente novamente.');
+                }
+
                 const shortHash = Math.random().toString(36).substring(2, 8);
 
                 try {
@@ -60,8 +73,7 @@
                     const data = await response.json();
 
                     resultDiv.textContent =
-                        'https://gouly.onrender.com/' +
-                        (data.shortUrl || shortHash);
+                        'https://gouly.site/' + (data.shortUrl || shortHash);
                     resultDiv.classList.remove('hidden');
                 } catch (err) {
                     alert('Erro na requisição: ' + err.message);
