@@ -10,7 +10,7 @@ func Redirect(w http.ResponseWriter, r *http.Request) {
     hash := r.URL.Path[1:]
 
     var originalURL string
-    err := db.QueryRow("SELECT original_url FROM urls WHERE short_url = ?", hash).Scan(&originalURL)
+    err := db.QueryRow("SELECT original_url FROM urls WHERE short_url = $1", hash).Scan(&originalURL)
     if err != nil {
         http.NotFound(w, r)
         return

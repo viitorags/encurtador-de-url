@@ -19,7 +19,7 @@ func CreateLink(w http.ResponseWriter, req *http.Request) {
         return
     }
 
-    stmt, err := db.Prepare("INSERT INTO urls (original_url, short_url) VALUES( ?, ? )")
+    stmt, err := db.Prepare("INSERT INTO urls (original_url, short_url) VALUES($1, $2)")
     if err != nil {
         logger.Error("Error creating link", err.Error())
         sendError(w, http.StatusInternalServerError, "Erro ao preparar query")
