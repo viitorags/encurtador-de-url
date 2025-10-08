@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <title>GoEncurt</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-50 font-sans">
+        <main
+            class="flex flex-col items-center justify-center min-h-screen p-4"
+        >
+            <h1 class="text-3xl font-bold text-indigo-600 mb-8">GoEncurt</h1>
+
+            <div class="w-full max-w-md">
+                <div class="flex gap-2">
+                    <input
+                        id="urlInput"
+                        type="text"
+                        placeholder="Cole sua URL aqui"
+                        class="flex-1 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500"
+                    />
+                    <button
+                        id="shortenBtn"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-3 rounded transition"
+                    >
+                        Encurtar
+                    </button>
+                </div>
+            </div>
+
+            <a
+                id="result"
+                class="mt-6 w-full max-w-md p-4 bg-white border border-gray-200 rounded shadow text-center text-indigo-700 font-medium hidden"
+            ></a>
+        </main>
+
+        <script>
+            const button = document.getElementById('shortenBtn');
+            const input = document.getElementById('urlInput');
+            const resultDiv = document.getElementById('result');
+
+            button.addEventListener('click', async () => {
+                const url = input.value.trim();
+                if (!url) return alert('Digite uma URL!');
+
+                const shortHash = Math.random().toString(36).substring(2, 8);
+
+                try {
+                    const response = await fetch('/api/v1/urls', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            original_url: url,
+                            short_url: shortHash,
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    resultDiv.textContent =
+                        'https://goencurt.com/' + (data.shortUrl || shortHash);
+                    resultDiv.classList.remove('hidden');
+                } catch (err) {
+                    alert('Erro na requisição: ' + err.message);
+                }
+            });
+        </script>
+    </body>
+</html>

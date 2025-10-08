@@ -25,14 +25,18 @@ func InitRoutes() {
     }
 
     router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        if r.Method != http.MethodGet {
-            http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+        if r.URL.Path == "/" {
+            if r.Method != http.MethodGet {
+                http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+                return
+            }
+            if err := tmpl.Execute(w, nil); err != nil {
+                http.Error(w, "Erro ao renderizar template", http.StatusInternalServerError)
+            }
             return
         }
 
-        if err := tmpl.Execute(w, nil); err != nil {
-            http.Error(w, "Erro ao renderizar template", http.StatusInternalServerError)
-        }
+        handler.Redirect(w, r)
     })
 
     router.HandleFunc(basePath, func(w http.ResponseWriter, r *http.Request) {
