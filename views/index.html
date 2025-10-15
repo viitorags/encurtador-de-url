@@ -115,7 +115,26 @@
             return Math.random().toString(36).substring(2, 8);
         }
 
-        const shortenURL = async () => {
+        const copyToClipboard = async () => {
+            try {
+                await navigator.clipboard.writeText(resultLink.textContent);
+
+                const copyText = document.getElementById('copyText');
+                const copiedText = document.getElementById('copiedText');
+
+                copyText.classList.add('hidden');
+                copiedText.classList.remove('hidden');
+
+                setTimeout(() => {
+                    copyText.classList.remove('hidden');
+                    copiedText.classList.add('hidden');
+                }, 2000);
+            } catch (err) {
+                showError('Não foi possível copiar. Copie manualmente.');
+            }
+        }
+
+        button.addEventListener('click', async => () {
             let url = validateAndNormalizeURL(input.value);
 
             if (!url) {
@@ -161,28 +180,7 @@
                 btnText.classList.remove('hidden');
                 btnLoader.classList.add('hidden');
             }
-        }
-
-        const copyToClipboard = async () => {
-            try {
-                await navigator.clipboard.writeText(resultLink.textContent);
-
-                const copyText = document.getElementById('copyText');
-                const copiedText = document.getElementById('copiedText');
-
-                copyText.classList.add('hidden');
-                copiedText.classList.remove('hidden');
-
-                setTimeout(() => {
-                    copyText.classList.remove('hidden');
-                    copiedText.classList.add('hidden');
-                }, 2000);
-            } catch (err) {
-                showError('Não foi possível copiar. Copie manualmente.');
-            }
-        }
-
-        button.addEventListener('click', shortenURL);
+        });
         copyBtn.addEventListener('click', copyToClipboard);
 
         input.addEventListener('keypress', (e) => {
