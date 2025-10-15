@@ -168,7 +168,7 @@
 
                 const shortURL = 'https://gouly.site/' + (data.shortUrl || shortHash);
 
-                resultLink.textContent = shortURL;
+                resultLink.textContent = 'https://gouly.site/' + (data.shortUrl || shortHash);
                 resultLink.href = shortURL;
                 resultContainer.classList.remove('hidden');
                 input.value = '';
