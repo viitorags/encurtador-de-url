@@ -1,11 +1,12 @@
 package router
 
 import (
-    "github.com/viitorags/encurtadorUrl/config"
-    "github.com/viitorags/encurtadorUrl/handler"
     "html/template"
     "net/http"
     "os"
+
+    "github.com/viitorags/encurtadorUrl/config"
+    "github.com/viitorags/encurtadorUrl/handler"
 )
 
 var (
@@ -23,6 +24,9 @@ func InitRoutes() {
         logger.Error("erro ao carregar template: ", err)
         os.Exit(1)
     }
+
+    fileServer := http.FileServer(http.Dir("."))
+    router.Handle("/static/", http.StripPrefix("/", fileServer))
 
     router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         if r.URL.Path == "/" {

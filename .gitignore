@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Build artifacts
+static/css/output.css
+
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work

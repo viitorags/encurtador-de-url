@@ -1,246 +1,299 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-        <title>Gouly - Encurtador de URLs</title>
-        <meta
-            name="description"
-            content="Encurte suas URLs de forma rápida e simples com Gouly"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="icon" type="image/x-icon" href="/static/favicon_io/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon_io/apple-touch-icon.png" />
+    <title>Gouly - Encurtador de URLs Rápido e Inteligente</title>
+    <meta name="description" content="Encurte URLs instantaneamente com Gouly. Simples, rápido e seguro." />
+    <link rel="stylesheet" href="/static/css/output.css" />
+    <style>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      .fade-in { animation: fadeIn 0.3s ease-out; }
+      .loading { animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+  </head>
 
-    <body
-        class="bg-gradient-to-br from-gray-50 to-indigo-50 font-sans antialiased"
-    >
-        <main
-            class="flex flex-col items-center justify-center min-h-screen p-4"
-        >
-            <!-- Header -->
-            <div class="text-center mb-10">
-                <h1
-                    class="text-5xl font-extrabold text-indigo-600 mb-2 tracking-tight"
-                >
-                    Gouly
-                </h1>
-                <p class="text-gray-600 text-lg">Encurte URLs em segundos ⚡</p>
+  <body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-sans antialiased">
+    <main class="flex flex-col items-center justify-center min-h-screen p-4" aria-label="Área principal do encurtador de URLs">
+      <div class="text-center mb-8">
+        <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-2">Gouly</h1>
+        <p class="text-gray-600 text-sm">Encurte URLs em segundos. Simples assim.</p>
+      </div>
+
+      <section class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8" aria-labelledby="form-title">
+        <h2 id="form-title" class="sr-only">Encurtador de URLs</h2>
+
+        <form id="urlForm" class="space-y-4" autocomplete="off" novalidate aria-describedby="feedback">
+          <div>
+            <label for="urlInput" class="block text-sm font-medium text-gray-700 mb-2">
+              Cole sua URL aqui
+            </label>
+            <div class="relative">
+              <input
+                id="urlInput"
+                name="url"
+                type="text"
+                placeholder="https://exemplo.com.br/pagina-muito-longa"
+                class="w-full p-4 pr-12 rounded-lg border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-700"
+                inputmode="url"
+                aria-required="true"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <!-- Ícone visual de URL -->
+              <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+              </svg>
             </div>
+          </div>
 
-            <!-- Input Section -->
-            <div class="w-full max-w-2xl">
-                <div
-                    class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
-                >
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <input
-                            id="urlInput"
-                            type="text"
-                            placeholder="Cole sua URL aqui (ex: youtube.com/video)"
-                            class="flex-1 p-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-gray-700 placeholder-gray-400"
-                            aria-label="Campo de URL"
-                        />
-                        <button
-                            id="shortenBtn"
-                            class="bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold px-8 py-4 rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
-                            aria-label="Encurtar URL"
-                        >
-                            <span id="btnText">Encurtar</span>
-                            <span id="btnLoader" class="hidden">
-                                <svg
-                                    class="animate-spin h-5 w-5 inline"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <circle
-                                        class="opacity-25"
-                                        cx="12"
-                                        cy="12"
-                                        r="10"
-                                        stroke="currentColor"
-                                        stroke-width="4"
-                                    ></circle>
-                                    <path
-                                        class="opacity-75"
-                                        fill="currentColor"
-                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                    ></path>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                </div>
+          <button
+            id="shortenBtn"
+            type="submit"
+            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-6 py-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            aria-label="Encurtar URL"
+          >
+            <span id="btnText">Encurtar Agora</span>
+          </button>
+        </form>
 
-                <!-- Result Section -->
-                <div
-                    id="resultContainer"
-                    class="mt-6 p-6 bg-white border-2 border-indigo-200 rounded-2xl shadow-lg hidden animate-fadeIn"
-                >
-                    <div class="flex items-center justify-between gap-4">
-                        <div class="flex-1 overflow-hidden">
-                            <p class="text-sm text-gray-500 mb-1">
-                                Sua URL encurtada:
-                            </p>
-                            <!-- Corrigindo a tag a que estava incorreta -->
-                            <a
-                                id="resultLink"
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-indigo-600 font-semibold text-lg hover:text-indigo-800 transition-colors break-all"
-                            >
-                            </a>
-                        </div>
-                        <button
-                            id="copyBtn"
-                            class="flex-shrink-0 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium px-5 py-3 rounded-lg transition-all active:scale-95"
-                            aria-label="Copiar URL"
-                        >
-                            <span id="copyText">Copiar</span>
-                            <span id="copiedText" class="hidden"
-                                >✓ Copiado!</span
-                            >
-                        </button>
-                    </div>
-                </div>
+        <div id="resultWrap" class="mt-6 hidden fade-in" role="region" aria-label="Resultado encurtado">
+          <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-5">
+            <p class="text-xs font-semibold text-green-700 mb-2 uppercase tracking-wide">✓ URL Encurtada</p>
+            <div class="flex items-center gap-3">
 
-                <!-- Error Message -->
-                <div
-                    id="errorMessage"
-                    class="mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg hidden"
-                    role="alert"
-                >
-                    <p class="font-medium">Erro</p>
-                    <p id="errorText" class="text-sm"></p>
-                </div>
+                id="result"
+                class="flex-1 text-indigo-600 font-bold text-lg truncate hover:text-indigo-800 transition"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="URL encurtada - clique para abrir"
+              ></a>
+              <button
+                id="copyBtn"
+                class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
+                aria-label="Copiar URL"
+              >
+                <span id="copyBtnText">Copiar</span>
+              </button>
             </div>
+          </div>
+        </div>
 
-            <!-- Footer Info -->
-            <div class="mt-12 text-center text-gray-500 text-sm">
-                <p>✨ URLs curtas, compartilhamento fácil</p>
-            </div>
-        </main>
+        <div id="feedbackWrap" class="mt-4 min-h-[24px]">
+          <p id="feedback" class="text-sm text-center transition-all duration-200" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </section>
 
-        <script>
-            const button = document.getElementById('shortenBtn');
-            const input = document.getElementById('urlInput');
-            const resultContainer = document.getElementById('resultContainer');
-            const resultLink = document.getElementById('resultLink');
-            const copyBtn = document.getElementById('copyBtn');
-            const errorMessage = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            const btnText = document.getElementById('btnText');
-            const btnLoader = document.getElementById('btnLoader');
+      <footer class="mt-8 text-center text-xs text-gray-500">
+        <p>Seguro • Rápido • Gratuito</p>
+      </footer>
+    </main>
 
-            function showError(message) {
-                errorText.textContent = message;
-                errorMessage.classList.remove('hidden');
-                setTimeout(() => errorMessage.classList.add('hidden'), 5000);
-            }
+    <script>
+      (function () {
+        'use strict';
 
-            function validateAndNormalizeURL(url) {
-                url = url.trim();
-                if (!url) return null;
+        const form = document.getElementById('urlForm');
+        const input = document.getElementById('urlInput');
+        const shortenBtn = document.getElementById('shortenBtn');
+        const btnText = document.getElementById('btnText');
+        const resultAnchor = document.getElementById('result');
+        const resultWrap = document.getElementById('resultWrap');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyBtnText = document.getElementById('copyBtnText');
+        const feedback = document.getElementById('feedback');
+        const feedbackWrap = document.getElementById('feedbackWrap');
 
-                if (!/^https?:\/\//i.test(url)) {
-                    url = 'https://' + url;
-                }
+        let isProcessing = false;
 
-                const urlPattern =
-                    /^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:[0-9]+)?(\/.*)?$/;
-                return urlPattern.test(url) ? url : null;
-            }
+        const normalizeUrl = (raw) => {
+          let url = raw.trim();
+          if (!/^https?:\/\//i.test(url)) {
+            url = 'https://' + url;
+          }
+          return url;
+        };
 
-            const copyToClipboard = async () => {
-                try {
-                    await navigator.clipboard.writeText(resultLink.textContent);
+        const isValidUrl = (url) => {
+          try {
+            const urlObj = new URL(url);
+            return ['http:', 'https:'].includes(urlObj.protocol);
+          } catch {
+            return false;
+          }
+        };
 
-                    const copyText = document.getElementById('copyText');
-                    const copiedText = document.getElementById('copiedText');
+        const generateShortHash = () => {
+          const timestamp = Date.now().toString(36);
+          const randomPart = Math.random().toString(36).substring(2, 10);
+          return (timestamp + randomPart).substring(0, 12);
+        };
 
-                    copyText.classList.add('hidden');
-                    copiedText.classList.remove('hidden');
+        const setFeedback = (msg, type = 'info') => {
+          const colors = {
+            info: 'text-gray-600',
+            success: 'text-green-600 font-semibold',
+            error: 'text-red-600 font-semibold',
+            loading: 'text-indigo-600 loading'
+          };
 
-                    setTimeout(() => {
-                        copyText.classList.remove('hidden');
-                        copiedText.classList.add('hidden');
-                    }, 2000);
-                } catch (err) {
-                    showError('Não foi possível copiar. Copie manualmente.');
-                }
-            };
+          feedback.className = `text-sm text-center transition-all duration-200 ${colors[type] || colors.info}`;
+          feedback.textContent = msg;
+        };
 
-            async function shortenURL() {
-                let url = validateAndNormalizeURL(input.value);
+        const clearFeedback = () => {
+          setTimeout(() => {
+            if (!isProcessing) feedback.textContent = '';
+          }, 5000);
+        };
 
-                if (!url) {
-                    showError(
-                        'URL inválida! Digite uma URL válida (ex: youtube.com)'
-                    );
-                    return;
-                }
+        const setButtonLoading = (loading) => {
+          isProcessing = loading;
+          shortenBtn.disabled = loading;
+          btnText.textContent = loading ? '⏳ Processando...' : '🚀 Encurtar Agora';
 
-                button.disabled = true;
-                btnText.classList.add('hidden');
-                btnLoader.classList.remove('hidden');
-                errorMessage.classList.add('hidden');
-                resultContainer.classList.add('hidden');
+          if (loading) {
+            shortenBtn.classList.add('loading');
+          } else {
+            shortenBtn.classList.remove('loading');
+          }
+        };
 
-                const shortHash = Math.random().toString(36).substring(2, 8);
+        const copyToClipboard = async (text) => {
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtnText.textContent = '✓ Copiado!';
+            copyBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            copyBtn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
 
-                try {
-                    const response = await fetch('/api/v1/urls', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            original_url: url,
-                            short_url: shortHash,
-                        }),
-                    });
+            setTimeout(() => {
+              copyBtnText.textContent = 'Copiar';
+              copyBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+              copyBtn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+            }, 2000);
 
-                    const data = await response.json();
+            return true;
+          } catch {
+            return false;
+          }
+        };
 
-                    if (!response.ok) {
-                        throw new Error(`Erro HTTP ${response.status}`);
-                    }
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
 
-                    const shortURL =
-                        'https://gouly.site/' +
-                        (data.data?.short_url || shortHash);
+          if (isProcessing) return;
 
-                    resultLink.textContent = shortURL;
-                    resultLink.href = shortURL;
-                    resultContainer.classList.remove('hidden');
-                } catch (err) {
-                    showError(
-                        'Não foi possível encurtar a URL. Tente novamente.'
-                    );
-                    console.error('Erro:', err);
-                } finally {
-                    button.disabled = false;
-                    btnText.classList.remove('hidden');
-                    btnLoader.classList.add('hidden');
-                }
-            }
+          let url = input.value.trim();
 
-            button.addEventListener('click', shortenURL);
-            copyBtn.addEventListener('click', copyToClipboard);
+          if (!url) {
+            setFeedback('⚠️ Por favor, insira uma URL válida', 'error');
+            input.focus();
+            clearFeedback();
+            return;
+          }
 
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') shortenURL();
+          url = normalizeUrl(url);
+
+          if (!isValidUrl(url)) {
+            setFeedback('❌ URL inválida. Exemplo: https://exemplo.com', 'error');
+            input.focus();
+            clearFeedback();
+            return;
+          }
+
+          setButtonLoading(true);
+          setFeedback('🔗 Encurtando sua URL...', 'loading');
+          resultWrap.classList.add('hidden');
+
+          const shortHash = generateShortHash();
+
+          try {
+            const response = await fetch('/api/v1/urls', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                original_url: url,
+                short_url: shortHash
+              }),
             });
 
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(-10px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
-            `;
-            document.head.appendChild(style);
-        </script>
-    </body>
+            if (!response.ok) {
+              const errorData = await response.json().catch(() => ({}));
+              throw new Error(errorData.message || `Erro ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            const finalShort = data?.shortUrl || data?.short_url || shortHash;
+            const finalUrl = `https://gouly.site/${finalShort}`;
+
+            resultAnchor.textContent = finalUrl;
+            resultAnchor.href = finalUrl;
+            resultAnchor.title = `Abrir ${finalUrl}`;
+            resultWrap.classList.remove('hidden');
+
+            const copied = await copyToClipboard(finalUrl);
+
+            if (copied) {
+              setFeedback('✓ URL encurtada e copiada com sucesso!', 'success');
+            } else {
+              setFeedback('✓ URL encurtada! Clique em "Copiar" para copiar.', 'success');
+            }
+
+            input.value = '';
+
+            clearFeedback();
+
+          } catch (err) {
+            console.error('Erro ao encurtar URL:', err);
+            setFeedback(`❌ Erro: ${err.message}`, 'error');
+            clearFeedback();
+          } finally {
+            setButtonLoading(false);
+          }
+        });
+
+        copyBtn.addEventListener('click', async () => {
+          const url = resultAnchor.textContent;
+          const copied = await copyToClipboard(url);
+
+          if (copied) {
+            setFeedback('✓ URL copiada para a área de transferência!', 'success');
+          } else {
+            setFeedback('❌ Não foi possível copiar. Selecione e copie manualmente.', 'error');
+          }
+
+          clearFeedback();
+        });
+
+        input.addEventListener('input', () => {
+          if (feedback.textContent && !isProcessing) {
+            feedback.textContent = '';
+          }
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && !isProcessing) {
+            form.requestSubmit();
+          }
+        });
+
+      })();
+    </script>
+  </body>
 </html>
