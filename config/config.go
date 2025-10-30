@@ -1,31 +1,31 @@
 package config
 
 import (
-    "database/sql"
-    "fmt"
+	"database/sql"
+	"fmt"
 )
 
 var (
-    db     *sql.DB
-    logger *Logger
-    err    error
+	db     *sql.DB
+	logger *Logger
+	err    error
 )
 
 func InitConfig() error {
-    db, err = InitDB()
-    if err != nil {
-        return fmt.Errorf("Error initialize database: %v", err)
-    }
+	db, err = InitDB()
+	if err != nil {
+		return fmt.Errorf("Error initialize database: %v", err)
+	}
 
-    return nil
+	return nil
 }
 
 func GetDB() *sql.DB {
-    return db
+	return db
 }
 
 func GetLogger(p string) *Logger {
-    logger := NewLogger(p)
+	logger := NewLogger(p)
 
-    return logger
+	return logger
 }

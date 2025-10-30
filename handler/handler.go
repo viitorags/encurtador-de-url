@@ -1,17 +1,17 @@
 package handler
 
 import (
-    "database/sql"
+	"database/sql"
 
-    "github.com/viitorags/encurtadorUrl/config"
+	"github.com/viitorags/encurtadorUrl/config"
 )
 
 var (
-    logger *config.Logger
-    db     *sql.DB
+	logger *config.Logger
+	db     *sql.DB
 )
 
 func InitializeHandler() {
-    logger = config.GetLogger("handler")
-    db = config.GetDB()
+	logger = config.GetLogger("handler")
+	db = config.GetDB()
 }
