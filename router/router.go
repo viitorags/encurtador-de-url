@@ -52,7 +52,7 @@ func InitRoutes() {
 		}
 	})
 
-	if err := http.ListenAndServe(":8080", router); err != nil {
+	if err := http.ListenAndServe(":8085", router); err != nil {
 		logger.Error("config initialization error", err)
 		os.Exit(1)
 	}
