@@ -1,422 +1,422 @@
 <!doctype html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-		<link
-			rel="icon"
-			type="image/x-icon"
-			href="/static/favicon_io/favicon.ico"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/static/favicon_io/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/static/favicon_io/favicon-16x16.png"
-		/>
-		<link
-			rel="apple-touch-icon"
-			sizes="181x180"
-			href="/static/favicon_io/apple-touch-icon.png"
-		/>
-		<title>Gouly - Encurtador de URLs Rápido e Inteligente</title>
-		<meta
-			name="description"
-			content="Encurte URLs instantaneamente com Gouly. Simples, rápido e seguro."
-		/>
-		<link rel="stylesheet" href="/static/css/output.css" />
-		<style>
-			@keyframes fadeIn {
-				from {
-					opacity: 0;
-					transform: translateY(-10px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-			@keyframes pulse {
-				0%,
-				100% {
-					opacity: 1;
-				}
-				50% {
-					opacity: 0.5;
-				}
-			}
-			.fade-in {
-				animation: fadeIn 0.3s ease-out;
-			}
-			.loading {
-				animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-			}
-		</style>
-	</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="/static/favicon_io/favicon.ico"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/static/favicon_io/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/static/favicon_io/favicon-16x16.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="181x180"
+            href="/static/favicon_io/apple-touch-icon.png"
+        />
+        <title>Gouly - Encurtador de URLs Rápido e Inteligente</title>
+        <meta
+            name="description"
+            content="Encurte URLs instantaneamente com Gouly. Simples, rápido e seguro."
+        />
+        <link rel="stylesheet" href="/static/css/output.css" />
+        <style>
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+            }
+            .fade-in {
+                animation: fadeIn 0.3s ease-out;
+            }
+            .loading {
+                animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+        </style>
+    </head>
 
-	<body
-		class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-sans antialiased"
-	>
-		<main
-			class="flex flex-col items-center justify-center min-h-screen p-4"
-			aria-label="Área principal do encurtador de URLs"
-		>
-			<div class="text-center mb-8">
-				<h1
-					class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-2"
-				>
-					Gouly
-				</h1>
-				<p class="text-gray-600 text-sm">
-					Encurte URLs em segundos. Simples assim.
-				</p>
-			</div>
+    <body
+        class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-sans antialiased"
+    >
+        <main
+            class="flex flex-col items-center justify-center min-h-screen p-4"
+            aria-label="Área principal do encurtador de URLs"
+        >
+            <div class="text-center mb-8">
+                <h1
+                    class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-2"
+                >
+                    Gouly
+                </h1>
+                <p class="text-gray-600 text-sm">
+                    Encurte URLs em segundos. Simples assim.
+                </p>
+            </div>
 
-			<section
-				class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8"
-				aria-labelledby="form-title"
-			>
-				<h2 id="form-title" class="sr-only">Encurtador de URLs</h2>
+            <section
+                class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8"
+                aria-labelledby="form-title"
+            >
+                <h2 id="form-title" class="sr-only">Encurtador de URLs</h2>
 
-				<form
-					id="urlForm"
-					class="space-y-4"
-					autocomplete="off"
-					novalidate
-					aria-describedby="feedback"
-				>
-					<div>
-						<label
-							for="urlInput"
-							class="block text-sm font-medium text-gray-700 mb-2"
-						>
-							Cole sua URL aqui
-						</label>
-						<div class="relative">
-							<input
-								id="urlInput"
-								name="url"
-								type="text"
-								placeholder="https://exemplo.com.br/pagina-muito-longa"
-								class="w-full p-4 pr-12 rounded-lg border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-700"
-								inputmode="url"
-								aria-required="true"
-								autocomplete="off"
-								spellcheck="false"
-							/>
-							<!-- Ícone visual de URL -->
-							<svg
-								class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-								/>
-							</svg>
-						</div>
-					</div>
+                <form
+                    id="urlForm"
+                    class="space-y-4"
+                    autocomplete="off"
+                    novalidate
+                    aria-describedby="feedback"
+                >
+                    <div>
+                        <label
+                            for="urlInput"
+                            class="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                            Cole sua URL aqui
+                        </label>
+                        <div class="relative">
+                            <input
+                                id="urlInput"
+                                name="url"
+                                type="text"
+                                placeholder="https://exemplo.com.br/pagina-muito-longa"
+                                class="w-full p-4 pr-12 rounded-lg border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-700"
+                                inputmode="url"
+                                aria-required="true"
+                                autocomplete="off"
+                                spellcheck="false"
+                            />
+                            <!-- Ícone visual de URL -->
+                            <svg
+                                class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                                />
+                            </svg>
+                        </div>
+                    </div>
 
-					<button
-						id="shortenBtn"
-						type="submit"
-						class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-6 py-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-						aria-label="Encurtar URL"
-					>
-						<span id="btnText">Encurtar Agora</span>
-					</button>
-				</form>
+                    <button
+                        id="shortenBtn"
+                        type="submit"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold px-6 py-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        aria-label="Encurtar URL"
+                    >
+                        <span id="btnText">Encurtar Agora</span>
+                    </button>
+                </form>
 
-				<div
-					id="resultWrap"
-					class="mt-6 hidden fade-in"
-					role="region"
-					aria-label="Resultado encurtado"
-				>
-					<div
-						class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-5"
-					>
-						<p
-							class="text-xs font-semibold text-green-700 mb-2 uppercase tracking-wide"
-						>
-							✓ URL Encurtada
-						</p>
-						<div
-							class="flex items-center gap-3"
-							id="result"
-							class="flex-1 text-indigo-600 font-bold text-lg truncate hover:text-indigo-800 transition"
-							href="#"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="URL encurtada - clique para abrir"
-						>
-							<button
-								id="copyBtn"
-								class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
-								aria-label="Copiar URL"
-							>
-								<span id="copyBtnText">Copiar</span>
-							</button>
-						</div>
-					</div>
-				</div>
+                <div
+                    id="resultWrap"
+                    class="mt-6 hidden fade-in"
+                    role="region"
+                    aria-label="Resultado encurtado"
+                >
+                    <div
+                        class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-5"
+                    >
+                        <p
+                            class="text-xs font-semibold text-green-700 mb-2 uppercase tracking-wide"
+                        >
+                            ✓ URL Encurtada
+                        </p>
+                        <div
+                            class="flex items-center gap-3"
+                            id="result"
+                            class="flex-1 text-indigo-600 font-bold text-lg truncate hover:text-indigo-800 transition"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="URL encurtada - clique para abrir"
+                        >
+                            <button
+                                id="copyBtn"
+                                class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
+                                aria-label="Copiar URL"
+                            >
+                                <span id="copyBtnText">Copiar</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-				<div id="feedbackWrap" class="mt-4 min-h-[24px]">
-					<p
-						id="feedback"
-						class="text-sm text-center transition-all duration-200"
-						aria-live="polite"
-						aria-atomic="true"
-					></p>
-				</div>
-			</section>
+                <div id="feedbackWrap" class="mt-4 min-h-[24px]">
+                    <p
+                        id="feedback"
+                        class="text-sm text-center transition-all duration-200"
+                        aria-live="polite"
+                        aria-atomic="true"
+                    ></p>
+                </div>
+            </section>
 
-			<footer class="mt-8 text-center text-xs text-gray-500">
-				<p>Seguro • Rápido • Gratuito</p>
-			</footer>
-		</main>
+            <footer class="mt-8 text-center text-xs text-gray-500">
+                <p>Seguro • Rápido • Gratuito</p>
+            </footer>
+        </main>
 
-		<script>
-			(function () {
-				'use strict';
+        <script>
+            (function () {
+                'use strict';
 
-				const form = document.getElementById('urlForm');
-				const input = document.getElementById('urlInput');
-				const shortenBtn = document.getElementById('shortenBtn');
-				const btnText = document.getElementById('btnText');
-				const resultAnchor = document.getElementById('result');
-				const resultWrap = document.getElementById('resultWrap');
-				const copyBtn = document.getElementById('copyBtn');
-				const copyBtnText = document.getElementById('copyBtnText');
-				const feedback = document.getElementById('feedback');
-				const feedbackWrap = document.getElementById('feedbackWrap');
+                const form = document.getElementById('urlForm');
+                const input = document.getElementById('urlInput');
+                const shortenBtn = document.getElementById('shortenBtn');
+                const btnText = document.getElementById('btnText');
+                const resultAnchor = document.getElementById('result');
+                const resultWrap = document.getElementById('resultWrap');
+                const copyBtn = document.getElementById('copyBtn');
+                const copyBtnText = document.getElementById('copyBtnText');
+                const feedback = document.getElementById('feedback');
+                const feedbackWrap = document.getElementById('feedbackWrap');
 
-				let isProcessing = false;
+                let isProcessing = false;
 
-				const normalizeUrl = (raw) => {
-					let url = raw.trim();
-					if (!/^https?:\/\//i.test(url)) {
-						url = 'https://' + url;
-					}
-					return url;
-				};
+                const normalizeUrl = (raw) => {
+                    let url = raw.trim();
+                    if (!/^https?:\/\//i.test(url)) {
+                        url = 'https://' + url;
+                    }
+                    return url;
+                };
 
-				const isValidUrl = (url) => {
-					try {
-						const urlObj = new URL(url);
-						return ['http:', 'https:'].includes(urlObj.protocol);
-					} catch {
-						return false;
-					}
-				};
+                const isValidUrl = (url) => {
+                    try {
+                        const urlObj = new URL(url);
+                        return ['http:', 'https:'].includes(urlObj.protocol);
+                    } catch {
+                        return false;
+                    }
+                };
 
-				const generateShortHash = () => {
-					const timestamp = Date.now().toString(36);
-					const randomPart = Math.random()
-						.toString(36)
-						.substring(2, 10);
-					return (timestamp + randomPart).substring(0, 12);
-				};
+                const generateShortHash = () => {
+                    const timestamp = Date.now().toString(36);
+                    const randomPart = Math.random()
+                        .toString(36)
+                        .substring(2, 10);
+                    return (timestamp + randomPart).substring(0, 10);
+                };
 
-				const setFeedback = (msg, type = 'info') => {
-					const colors = {
-						info: 'text-gray-600',
-						success: 'text-green-600 font-semibold',
-						error: 'text-red-600 font-semibold',
-						loading: 'text-indigo-600 loading',
-					};
+                const setFeedback = (msg, type = 'info') => {
+                    const colors = {
+                        info: 'text-gray-600',
+                        success: 'text-green-600 font-semibold',
+                        error: 'text-red-600 font-semibold',
+                        loading: 'text-indigo-600 loading',
+                    };
 
-					feedback.className = `text-sm text-center transition-all duration-200 ${colors[type] || colors.info}`;
-					feedback.textContent = msg;
-				};
+                    feedback.className = `text-sm text-center transition-all duration-200 ${colors[type] || colors.info}`;
+                    feedback.textContent = msg;
+                };
 
-				const clearFeedback = () => {
-					setTimeout(() => {
-						if (!isProcessing) feedback.textContent = '';
-					}, 5000);
-				};
+                const clearFeedback = () => {
+                    setTimeout(() => {
+                        if (!isProcessing) feedback.textContent = '';
+                    }, 5000);
+                };
 
-				const setButtonLoading = (loading) => {
-					isProcessing = loading;
-					shortenBtn.disabled = loading;
-					btnText.textContent = loading
-						? '⏳ Processando...'
-						: '🚀 Encurtar Agora';
+                const setButtonLoading = (loading) => {
+                    isProcessing = loading;
+                    shortenBtn.disabled = loading;
+                    btnText.textContent = loading
+                        ? '⏳ Processando...'
+                        : '🚀 Encurtar Agora';
 
-					if (loading) {
-						shortenBtn.classList.add('loading');
-					} else {
-						shortenBtn.classList.remove('loading');
-					}
-				};
+                    if (loading) {
+                        shortenBtn.classList.add('loading');
+                    } else {
+                        shortenBtn.classList.remove('loading');
+                    }
+                };
 
-				const copyToClipboard = async (text) => {
-					try {
-						await navigator.clipboard.writeText(text);
-						copyBtnText.textContent = '✓ Copiado!';
-						copyBtn.classList.add(
-							'bg-green-600',
-							'hover:bg-green-700'
-						);
-						copyBtn.classList.remove(
-							'bg-indigo-600',
-							'hover:bg-indigo-700'
-						);
+                const copyToClipboard = async (text) => {
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        copyBtnText.textContent = '✓ Copiado!';
+                        copyBtn.classList.add(
+                            'bg-green-600',
+                            'hover:bg-green-700'
+                        );
+                        copyBtn.classList.remove(
+                            'bg-indigo-600',
+                            'hover:bg-indigo-700'
+                        );
 
-						setTimeout(() => {
-							copyBtnText.textContent = 'Copiar';
-							copyBtn.classList.remove(
-								'bg-green-600',
-								'hover:bg-green-700'
-							);
-							copyBtn.classList.add(
-								'bg-indigo-600',
-								'hover:bg-indigo-700'
-							);
-						}, 2000);
+                        setTimeout(() => {
+                            copyBtnText.textContent = 'Copiar';
+                            copyBtn.classList.remove(
+                                'bg-green-600',
+                                'hover:bg-green-700'
+                            );
+                            copyBtn.classList.add(
+                                'bg-indigo-600',
+                                'hover:bg-indigo-700'
+                            );
+                        }, 2000);
 
-						return true;
-					} catch {
-						return false;
-					}
-				};
+                        return true;
+                    } catch {
+                        return false;
+                    }
+                };
 
-				form.addEventListener('submit', async (e) => {
-					e.preventDefault();
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
 
-					if (isProcessing) return;
+                    if (isProcessing) return;
 
-					let url = input.value.trim();
+                    let url = input.value.trim();
 
-					if (!url) {
-						setFeedback(
-							'⚠️ Por favor, insira uma URL válida',
-							'error'
-						);
-						input.focus();
-						clearFeedback();
-						return;
-					}
+                    if (!url) {
+                        setFeedback(
+                            '⚠️ Por favor, insira uma URL válida',
+                            'error'
+                        );
+                        input.focus();
+                        clearFeedback();
+                        return;
+                    }
 
-					url = normalizeUrl(url);
+                    url = normalizeUrl(url);
 
-					if (!isValidUrl(url)) {
-						setFeedback(
-							'❌ URL inválida. Exemplo: https://exemplo.com',
-							'error'
-						);
-						input.focus();
-						clearFeedback();
-						return;
-					}
+                    if (!isValidUrl(url)) {
+                        setFeedback(
+                            '❌ URL inválida. Exemplo: https://exemplo.com',
+                            'error'
+                        );
+                        input.focus();
+                        clearFeedback();
+                        return;
+                    }
 
-					setButtonLoading(true);
-					setFeedback('🔗 Encurtando sua URL...', 'loading');
-					resultWrap.classList.add('hidden');
+                    setButtonLoading(true);
+                    setFeedback('🔗 Encurtando sua URL...', 'loading');
+                    resultWrap.classList.add('hidden');
 
-					const shortHash = generateShortHash();
+                    const shortHash = generateShortHash();
 
-					try {
-						const response = await fetch('/api/v1/urls', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-								Accept: 'application/json',
-							},
-							body: JSON.stringify({
-								original_url: url,
-								short_url: shortHash,
-							}),
-						});
+                    try {
+                        const response = await fetch('/api/v1/urls', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Accept: 'application/json',
+                            },
+                            body: JSON.stringify({
+                                original_url: url,
+                                short_url: shortHash,
+                            }),
+                        });
 
-						if (!response.ok) {
-							const errorData = await response
-								.json()
-								.catch(() => ({}));
-							throw new Error(
-								errorData.message ||
-									`Erro ${response.status}: ${response.statusText}`
-							);
-						}
+                        if (!response.ok) {
+                            const errorData = await response
+                                .json()
+                                .catch(() => ({}));
+                            throw new Error(
+                                errorData.message ||
+                                    `Erro ${response.status}: ${response.statusText}`
+                            );
+                        }
 
-						const data = await response.json();
-						const finalShort =
-							data?.shortUrl || data?.short_url || shortHash;
-						const finalUrl = `https://gouly.site/${finalShort}`;
+                        const data = await response.json();
+                        const finalShort =
+                            data?.shortUrl || data?.short_url || shortHash;
+                        const finalUrl = `https://gouly.site/${finalShort}`;
 
-						resultAnchor.textContent = finalUrl;
-						resultAnchor.href = finalUrl;
-						resultAnchor.title = `Abrir ${finalUrl}`;
-						resultWrap.classList.remove('hidden');
+                        resultAnchor.textContent = finalUrl;
+                        resultAnchor.href = finalUrl;
+                        resultAnchor.title = `Abrir ${finalUrl}`;
+                        resultWrap.classList.remove('hidden');
 
-						const copied = await copyToClipboard(finalUrl);
+                        const copied = await copyToClipboard(finalUrl);
 
-						if (copied) {
-							setFeedback(
-								'✓ URL encurtada e copiada com sucesso!',
-								'success'
-							);
-						} else {
-							setFeedback(
-								'✓ URL encurtada! Clique em "Copiar" para copiar.',
-								'success'
-							);
-						}
+                        if (copied) {
+                            setFeedback(
+                                '✓ URL encurtada e copiada com sucesso!',
+                                'success'
+                            );
+                        } else {
+                            setFeedback(
+                                '✓ URL encurtada! Clique em "Copiar" para copiar.',
+                                'success'
+                            );
+                        }
 
-						input.value = '';
+                        input.value = '';
 
-						clearFeedback();
-					} catch (err) {
-						console.error('Erro ao encurtar URL:', err);
-						setFeedback(`❌ Erro: ${err.message}`, 'error');
-						clearFeedback();
-					} finally {
-						setButtonLoading(false);
-					}
-				});
+                        clearFeedback();
+                    } catch (err) {
+                        console.error('Erro ao encurtar URL:', err);
+                        setFeedback(`❌ Erro: ${err.message}`, 'error');
+                        clearFeedback();
+                    } finally {
+                        setButtonLoading(false);
+                    }
+                });
 
-				copyBtn.addEventListener('click', async () => {
-					const url = resultAnchor.textContent;
-					const copied = await copyToClipboard(url);
+                copyBtn.addEventListener('click', async () => {
+                    const url = resultAnchor.textContent;
+                    const copied = await copyToClipboard(url);
 
-					if (copied) {
-						setFeedback(
-							'✓ URL copiada para a área de transferência!',
-							'success'
-						);
-					} else {
-						setFeedback(
-							'❌ Não foi possível copiar. Selecione e copie manualmente.',
-							'error'
-						);
-					}
+                    if (copied) {
+                        setFeedback(
+                            '✓ URL copiada para a área de transferência!',
+                            'success'
+                        );
+                    } else {
+                        setFeedback(
+                            '❌ Não foi possível copiar. Selecione e copie manualmente.',
+                            'error'
+                        );
+                    }
 
-					clearFeedback();
-				});
+                    clearFeedback();
+                });
 
-				input.addEventListener('input', () => {
-					if (feedback.textContent && !isProcessing) {
-						feedback.textContent = '';
-					}
-				});
+                input.addEventListener('input', () => {
+                    if (feedback.textContent && !isProcessing) {
+                        feedback.textContent = '';
+                    }
+                });
 
-				input.addEventListener('keydown', (e) => {
-					if (e.key === 'Enter' && !isProcessing) {
-						form.requestSubmit();
-					}
-				});
-			})();
-		</script>
-	</body>
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !isProcessing) {
+                        form.requestSubmit();
+                    }
+                });
+            })();
+        </script>
+    </body>
 </html>
